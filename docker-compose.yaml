@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+    backend:
+        image: main-backend
+        ports:
+            - "3333:3333"
+    database:
+        image: main-db
+        restart: always
+        ports:
+            - "3306:3036"
+        environment:
+            MYSQL_ROOT_PASSWORD: RootPassword
+            MYSQL_DATABASE: MainDatabase
+            MYSQL_USER: MainUser
+            MYSQL_PASSWORD: MainPassword
+        volumes:
+            db-volume:/var/lib/mysql
+        extra_hosts:
+            - "host.docker.internal:172.17.0.1"
+
+volumes:
+    db-volume:
